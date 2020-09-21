@@ -21,6 +21,9 @@ class LobbyViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        
+        
         nameLabel.text = "勇者"
         staminaLabel.text = "\(stamina)/ 100"
         
@@ -37,7 +40,7 @@ class LobbyViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
-        techMonManager.playBGM(fileNme: "lobby")
+        techMonManager.playBGM(fileName: "lobby")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -64,7 +67,7 @@ class LobbyViewController: UIViewController {
         }
     }
     
-    func updatesStaminaValue() {
+    @objc func updateStaminaValue() {
         
         if stamina < 100 {
             
