@@ -66,28 +66,39 @@ class BattleViewController: UIViewController {
          enemyMPLabel.text = "\(enemy.currentMP)/ \(enemy.maxMP)"
     }
         
+    func enemyAttack() {
+        techMonManager.damageAnimation(imageView: playerImageView)
+        techMonManager.playSE(fileName: "SE_attack")
         
-    func updateGame() {
+        player.currentHP -= 20
         
-        playerMP += 1
-        if playerMP >= 20 {
+        playerMPLabel.text = "\(player.currentHP) / \(player.maxHP)"
+        if player.currentHP <= 0 {
+            finishBattle(vanishImageView: playerImageView, isPlayerWin: false)
+        }
+    }
+    
+    @objc func updateGame() {
+        
+        player.currentMP += 1
+        if player.currentMP >= 20 {
             
             isPlayerAttackAvailable = true
-            playerMP = 20
+            player.currentMP = 20
         }else{
             
             isPlayerAttackAvailable = false
         }
         
-       enemyMP += 1
-        if enemyMP >= 35 {
+       enemy.currentMP += 1
+        if enemy.currentMP >= 35 {
             
             enemyAttack()
-            enemyMP = 0
+            enemy.currentMP = 0
         }
         
-        playerMPLabel.text = "\(playerMP)/ 20"
-        enemyMPLabel.text = "\(enemyMP)/ 35"
+        playerMPLabel.text = "\(player.currentMP)/ 20"
+        enemyMPLabel.text = "\(enemy.currentMP)/ 35"
     }
     
     func judgeBattle() {
